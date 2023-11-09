@@ -1,0 +1,92 @@
+// Define mixins
+@mixin center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin media-query($breakpoint) {
+  @media (min-width: #{$breakpoint}) {
+    @content;
+  }
+}
+
+// Define breakpoints
+$breakpoint-small: 480px;
+$breakpoint-medium: 801px;
+
+// Define colors
+$color-circle-1: #4e89ae;
+$color-circle-2: #43658b;
+$color-circle-3: #ed6663;
+$color-circle-4: #ffa372;
+$color-header-footer: #8ccff7;
+$color-hover: #444;
+
+// Circle radii
+$circle-radius-1: 70px;
+$circle-radius-2: 80px;
+$circle-radius-3: 90px;
+$circle-radius-4: 100px;
+
+.container {
+  background-color: $color-header-footer;
+  padding: 20px;
+  text-align: center;
+  
+  .header {
+    background-image: url('https://via.placeholder.com/400'); // Default for 801px and above
+    background-size: cover;
+    
+    @include media-query($breakpoint-medium) {
+      background-image: url('https://via.placeholder.com/300'); // 481px to 800px
+    }
+    
+    @include media-query($breakpoint-small) {
+      background-image: url('https://via.placeholder.com/200'); // 480px and below
+    }
+    
+    height: 200px; // Adjust the height as needed
+  }
+  
+  .circles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    @include media-query(621px) {
+      flex-direction: row;
+    }
+    
+    .circle {
+      margin: 10px;
+      width: $circle-radius-4 * 2;
+      height: $circle-radius-4 * 2;
+      border-radius: 50%;
+      background-color: $color-circle-1;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      
+      &:nth-child(2) {
+        background-color: $color-circle-2;
+      }
+      
+      &:nth-child(3) {
+        background-color: $color-circle-3;
+      }
+      
+      &:nth-child(4) {
+        background-color: $color-circle-4;
+      }
+      
+      &:hover {
+        background-color: $color-hover;
+      }
+    }
+  }
+}
+
+.footer {
+  background-color: $color-header-footer;
+  height: 50px;
+}
